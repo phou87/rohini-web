@@ -3,7 +3,7 @@ import { RadioGroup, Radio, ALIGN } from 'baseui/radio';
 import { Button } from "baseui/button";
 import { init, send } from 'emailjs-com';
 import {BLOCKS, BLOCK_STEPS} from '../shared/constants';
-import styles from '../styles/experiment.module.css'
+import styles from '../styles/Experiment.module.css'
 
 export function Block(props) {
   const [currentImage, setCurrentImage] = useState(0);
