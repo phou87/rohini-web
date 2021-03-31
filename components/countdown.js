@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import styles from '../styles/Experiment.module.css'
 
 export function Countdown(props) {
   const [num, setNum] = useState(3);
@@ -14,6 +15,6 @@ export function Countdown(props) {
   }, [num]);
 
   return (
-    <h1>{num}</h1>
+    <div className={styles.countdown}>{num}</div>
   );
 }

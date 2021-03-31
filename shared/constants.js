@@ -4,6 +4,7 @@ export const STEPS = {
   InstructionsTwo: 2,
   Countdown: 3,
   Block: 4,
+  End: 5,
 };
 
 export const BLOCK_STEPS = {
@@ -13,12 +14,33 @@ export const BLOCK_STEPS = {
   End: 3,
 };
 
+export const AGE_GROUPS = {
+  Adult: 0,
+  Child: 1,
+  Teen: 2,
+};
+
 export const KEYCODES = {
   Enter: 13,
 };
 
+export const BLOCK_TYPES = {
+  EXPRESS: 0,
+  SUPPRESS: 1,
+  NORMAL: 2,
+}
+
+export const BLOCK_TO_BLOCK_TYPE = {
+  1: BLOCK_TYPES.EXPRESS,
+  2: BLOCK_TYPES.EXPRESS,
+  3: BLOCK_TYPES.SUPPRESS,
+  4: BLOCK_TYPES.SUPPRESS,
+  5: BLOCK_TYPES.NORMAL,
+  6: BLOCK_TYPES.NORMAL,
+};
+
 export const BLOCKS = {
-  Adult: {
+  [AGE_GROUPS.Adult]: {
     1: [
       '/images/bugs.png',
       '/images/daffy.png',
@@ -68,7 +90,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
   },
-  YoungChild: {
+  [AGE_GROUPS.Child]: {
     1: [
       '/images/bugs.png',
       '/images/daffy.png',
@@ -118,7 +140,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
   },
-  OldChild: {
+  [AGE_GROUPS.TEEN]: {
     1: [
       '/images/bugs.png',
       '/images/daffy.png',

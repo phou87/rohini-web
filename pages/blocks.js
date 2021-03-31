@@ -53,7 +53,6 @@ export default function Blocks() {
   }
 
   const block = blocks[currentBlock];
-  console.log(currentBlock)
   if (currentBlock === 6) {
     return (
       <div className={styles.container}>
