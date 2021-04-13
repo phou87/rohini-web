@@ -7,15 +7,15 @@ import { Button } from "baseui/button";
 const OPTIONS = [
   {
     id: AGE_GROUPS.Adult,
-    label: 'Adult',
+    label: 'Parent',
   },
   {
     id: AGE_GROUPS.Child,
-    label: 'Child',
+    label: 'Teen (Age: 11-14)',
   },
   {
     id: AGE_GROUPS.Teen,
-    label: 'Teen',
+    label: 'Teen (Age: 15-17)',
   }
 ];
 

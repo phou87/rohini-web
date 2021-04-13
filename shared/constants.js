@@ -42,7 +42,7 @@ export const BLOCK_TO_BLOCK_TYPE = {
 export const BLOCKS = {
   [AGE_GROUPS.Adult]: {
     1: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',
@@ -50,7 +50,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
     2: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',
@@ -58,7 +58,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
     3: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',
@@ -66,7 +66,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
     4: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',
@@ -74,7 +74,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
     5: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',
@@ -82,7 +82,7 @@ export const BLOCKS = {
       '/images/wile.jpeg',
     ],
     6: [
-      '/images/bugs.png',
+      '/images/9600.bmp',
       '/images/daffy.png',
       '/images/devil.png',
       '/images/sylvester.png',

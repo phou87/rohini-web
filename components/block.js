@@ -3,6 +3,8 @@ import { RadioGroup, Radio, ALIGN } from 'baseui/radio';
 import { Button } from "baseui/button";
 import {BLOCKS, BLOCK_STEPS} from '../shared/constants';
 import styles from '../styles/Experiment.module.css'
+import homeStyles from '../styles/Home.module.css'
+import instructionStyles from '../styles/Instructions.module.css'
 
 export function Block(props) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -15,7 +17,7 @@ export function Block(props) {
       case BLOCK_STEPS.Cross:
         setTimeout(() => {
           setStep(BLOCK_STEPS.Image);
-        }, 4000);
+        }, 40);
         break;
       case BLOCK_STEPS.Image:
         setTimeout(() => {
@@ -26,7 +28,7 @@ export function Block(props) {
             setStep(BLOCK_STEPS.Cross);
             setCurrentImage(currentImage + 1);
           }
-        }, 10000);
+        }, 100);
         break;
     }
   }, [step]);
@@ -35,11 +37,11 @@ export function Block(props) {
     case BLOCK_STEPS.Cross:
       return <div className={styles.cross}>+</div>;
     case BLOCK_STEPS.Image:
-      return <img src={BLOCKS[ageGroup][block][currentImage]} />
+      return <img className={styles.experimentImg} src={BLOCKS[ageGroup][block][currentImage]} />
     case BLOCK_STEPS.Rate:
       return (
-        <>
-          <h3>
+        <div className={homeStyles.paddedContainer}>
+          <h3 className={instructionStyles.instructionsMedium}>
             While viewing the set of 5 pictures just presented, please indicate the
             extent that you experienced negative emotion (e.g. anger, revulsion,
             sadness, distress) by typing a number between 1 and 7.
@@ -52,15 +54,20 @@ export function Block(props) {
             align={ALIGN.horizontal}
           >
             {[1, 2, 3, 4, 5, 6, 7].map(r => (
-              <Radio key={r} value={String(r)}>{r}</Radio>
+              <Radio overrides={{Root: {
+                style: {
+                  marginRight: '70px',
+                },
+              }}} key={r} value={String(r)}>{r}</Radio>
             ))}
           </RadioGroup>
+          <div className={styles.verticalSpacer} />
           <Button disabled={rating === null} onClick={() => {
             rateBlock(block, rating);
             finishBlock();
             // setStep(BLOCK_STEPS.End);
           }}>Submit</Button>
-        </>
+        </div>
       )
     case BLOCK_STEPS.End:
       return (

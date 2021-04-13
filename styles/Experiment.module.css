@@ -1,6 +1,6 @@
 .ratingImg {
-  width: 400px;
-  height: 150px;
+  width: 960px;
+  height: 360px;
 }
 
 .cross {
@@ -9,4 +9,12 @@
 
 .countdown {
   font-size: 200px;
+}
+
+.experimentImg {
+  height: 100%;
+}
+
+.verticalSpacer {
+  height: 20px;
 }

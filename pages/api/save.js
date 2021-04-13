@@ -14,7 +14,12 @@ export default async (req, res) => {
     await doc.loadInfo();
 
     const sheet = doc.sheetsById[0];
-    await sheet.addRow({ Username: data.username, BlockOrder: data.blockOrder.toString(), Ratings: data.ratings.toString() });
+    await sheet.addRow({
+      Username: data.username,
+      BlockOrder: data.blockOrder.toString(),
+      Ratings: data.ratings.toString(),
+      BlockOrderRatings: data.blockOrderRatings.toString(),
+    });
 
     res.statusCode = 200;
     res.json({});

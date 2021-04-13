@@ -7,6 +7,7 @@ import {Countdown} from './countdown';
 import {Block} from './block';
 import {End} from './end';
 import{ init, send } from 'emailjs-com';
+import styles from '../styles/Home.module.css'
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 function shuffleArray(array) {
@@ -25,6 +26,7 @@ export function Experiment() {
     block: 0,
     blockOrder: shuffleArray([1, 2, 3, 4, 5, 6]),
     ratings: [0, 0, 0, 0, 0, 0],
+    blockOrderRatings: [0, 0, 0, 0, 0, 0],
     username: '',
     ageGroup: null,
   });
@@ -74,6 +76,7 @@ export function Experiment() {
       cache: 'no-cache',
       body: JSON.stringify({
         blockOrder: globalState.blockOrder,
+        blockOrderRatings: globalState.blockOrderRatings,
         ratings: globalState.ratings,
         username: globalState.username,
       }),
@@ -88,40 +91,54 @@ export function Experiment() {
   switch (globalState.step) {
     case STEPS.Intro:
       return (
-        <Intro
-          ageGroup={globalState.ageGroup}
-          username={globalState.username}
-          setAgeGroup={ageGroup => {
-            setGlobalState(prevState => ({
-              ...prevState,
-              ageGroup,
-            }));
-          }}
-          setUsername={username => {
-            setGlobalState(prevState => ({
-              ...prevState,
-              username,
-            }));
-          }}
-          onBegin={() => {
-            setGlobalState(prevState => ({
-              ...prevState,
-              step: STEPS.Instructions,
-            }));
-          }}
-        />
+        <div className={styles.paddedContainer}>
+          <Intro
+            ageGroup={globalState.ageGroup}
+            username={globalState.username}
+            setAgeGroup={ageGroup => {
+              setGlobalState(prevState => ({
+                ...prevState,
+                ageGroup,
+              }));
+            }}
+            setUsername={username => {
+              setGlobalState(prevState => ({
+                ...prevState,
+                username,
+              }));
+            }}
+            onBegin={() => {
+              setGlobalState(prevState => ({
+                ...prevState,
+                step: STEPS.Instructions,
+              }));
+            }}
+          />
+        </div>
       );
     case STEPS.Instructions:
-      return <Instructions />;
+      return (
+        <div className={styles.paddedContainer}>
+          <Instructions />
+        </div>
+      );
     case STEPS.InstructionsTwo:
-      return <InstructionsTwo blockType={blockType} />;
+      return (
+        <div className={styles.paddedContainer}>
+          <InstructionsTwo blockType={blockType} />
+        </div>
+      );
     case STEPS.Countdown:
-      return <Countdown done={() => {
-        setGlobalState(prevState => ({
-          ...prevState,
-          step: STEPS.Block,
-        }));
-      }} />;
+      return (
+        <div className={styles.paddedContainer}>
+          <Countdown done={() => {
+            setGlobalState(prevState => ({
+              ...prevState,
+              step: STEPS.Block,
+            }));
+          }} />
+        </div>
+      );
     case STEPS.Block:
       return (
         <Block
@@ -131,8 +148,11 @@ export function Experiment() {
           rateBlock={(block, rating) => {
             const ratings = globalState.ratings.slice();
             ratings[block - 1] = rating;
+            const blockOrderRatings = globalState.blockOrderRatings.slice();
+            blockOrderRatings[globalState.block] = rating;
             setGlobalState(prevState => ({
               ...prevState,
+              blockOrderRatings,
               ratings,
             }));
           }}
@@ -153,7 +173,11 @@ export function Experiment() {
         />
       );
     case STEPS.End:
-      return <End resultsSent={resultsSent} />;
+      return (
+        <div className={styles.paddedContainer}>
+          <End resultsSent={resultsSent} />
+        </div>
+      );
   }
 
   return null;
