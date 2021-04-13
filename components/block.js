@@ -17,7 +17,7 @@ export function Block(props) {
       case BLOCK_STEPS.Cross:
         setTimeout(() => {
           setStep(BLOCK_STEPS.Image);
-        }, 40);
+        }, 4000);
         break;
       case BLOCK_STEPS.Image:
         setTimeout(() => {
@@ -28,7 +28,7 @@ export function Block(props) {
             setStep(BLOCK_STEPS.Cross);
             setCurrentImage(currentImage + 1);
           }
-        }, 100);
+        }, 10000);
         break;
     }
   }, [step]);
