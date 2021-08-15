@@ -22,7 +22,7 @@ export default function Home() {
       }} theme={DarkTheme}>
         <div className={styles.container}>
           <Head>
-            <title>Insert Title Here</title>
+            <title>Family Flex EFT</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
 

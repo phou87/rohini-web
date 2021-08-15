@@ -17,18 +17,18 @@ export function Block(props) {
       case BLOCK_STEPS.Cross:
         setTimeout(() => {
           setStep(BLOCK_STEPS.Image);
-        }, 4000);
+        }, 400);
         break;
       case BLOCK_STEPS.Image:
         setTimeout(() => {
-          if (currentImage === 5) {
+          if (currentImage === 4) {
             setStep(BLOCK_STEPS.Rate);
           }
           else {
             setStep(BLOCK_STEPS.Cross);
             setCurrentImage(currentImage + 1);
           }
-        }, 10000);
+        }, 1000);
         break;
     }
   }, [step]);
