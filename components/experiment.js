@@ -29,12 +29,21 @@ export function Experiment() {
     blockOrderRatings: [0, 0, 0, 0, 0, 0],
     username: '',
     ageGroup: null,
+    blockBeginTimestamps: [0, 0, 0, 0, 0, 0],
+    blockEndTimestamps: [0, 0, 0, 0, 0, 0],
+    pictureBeginTimestamps: [0, 0, 0, 0, 0, 0],
+    pictureEndTimestamps: [0, 0, 0, 0, 0, 0],
+    taskBeginTimestamp: 0,
   });
 
   const [resultsSent, setResultsSent] = useState(false);
 
   useEffect(() => {
     init('user_UnI50fwe7uvL3JuEFBt1Y');
+    setGlobalState(prevState => ({
+      ...prevState,
+      taskBeginTimestamp: Date.now(),
+    }));
   }, []);
 
   useEffect(() => {
@@ -67,22 +76,35 @@ export function Experiment() {
   });
 
   useEffect(async () => {
-    if (globalState.step !== STEPS.End) {
-      return;
+    if (globalState.step === STEPS.InstructionsTwo) {
+      const blockBeginTimestamps = globalState.blockBeginTimestamps.slice();
+      blockBeginTimestamps[globalState.block] = Date.now();
+      setGlobalState(prevState => ({
+        ...prevState,
+        blockBeginTimestamps,
+      }));
     }
 
-    await fetch('/api/save', {
-      method: 'POST',
-      cache: 'no-cache',
-      body: JSON.stringify({
-        blockOrder: globalState.blockOrder,
-        blockOrderRatings: globalState.blockOrderRatings,
-        ratings: globalState.ratings,
-        username: globalState.username,
-      }),
-    });
+    if (globalState.step === STEPS.End) {
+      await fetch('/api/save', {
+        method: 'POST',
+        cache: 'no-cache',
+        body: JSON.stringify({
+          blockOrder: globalState.blockOrder,
+          blockOrderRatings: globalState.blockOrderRatings,
+          ratings: globalState.ratings,
+          username: globalState.username,
+          blockBeginTimestamps: globalState.blockBeginTimestamps,
+          blockEndTimestamps: globalState.blockEndTimestamps,
+          pictureBeginTimestamps: globalState.pictureBeginTimestamps,
+          pictureEndTimestamps: globalState.pictureEndTimestamps,
+          taskBeginTimestamp: globalState.taskBeginTimestamp,
+          taskEndTimestamp: Date.now(),
+        }),
+      });
 
-    setResultsSent(true);
+      setResultsSent(true);
+    }
   }, [globalState.step]);
 
   const block = globalState.blockOrder[globalState.block];
@@ -157,6 +179,13 @@ export function Experiment() {
             }));
           }}
           finishBlock={() => {
+            const blockEndTimestamps = globalState.blockEndTimestamps.slice();
+            blockEndTimestamps[globalState.block] = Date.now();
+            setGlobalState(prevState => ({
+              ...prevState,
+              blockEndTimestamps,
+            }));
+
             if (globalState.block === 5) {
               setGlobalState(prevState => ({
                 ...prevState,
@@ -169,6 +198,22 @@ export function Experiment() {
                 block: globalState.block + 1,
               }));
             }
+          }}
+          setPictureBeginTimestamp={() => {
+            const pictureBeginTimestamps = globalState.pictureBeginTimestamps.slice();
+            pictureBeginTimestamps[globalState.block] = Date.now();
+            setGlobalState(prevState => ({
+              ...prevState,
+              pictureBeginTimestamps,
+            }));
+          }}
+          setPictureEndTimestamp={() => {
+            const pictureEndTimestamps = globalState.pictureEndTimestamps.slice();
+            pictureEndTimestamps[globalState.block] = Date.now();
+            setGlobalState(prevState => ({
+              ...prevState,
+              pictureEndTimestamps,
+            }));
           }}
         />
       );

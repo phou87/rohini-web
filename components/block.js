@@ -10,7 +10,7 @@ export function Block(props) {
   const [currentImage, setCurrentImage] = useState(0);
   const [rating, setRating] = useState(null);
   const [step, setStep] = useState(BLOCK_STEPS.Cross);
-  const {ageGroup, block, rateBlock, finishBlock} = props;
+  const {ageGroup, block, rateBlock, finishBlock, setPictureBeginTimestamp, setPictureEndTimestamp} = props;
 
   useEffect(() => {
     switch (step) {
@@ -20,8 +20,12 @@ export function Block(props) {
         }, 4000);
         break;
       case BLOCK_STEPS.Image:
+        if (currentImage === 0) {
+          setPictureBeginTimestamp();
+        }
         setTimeout(() => {
           if (currentImage === 4) {
+            setPictureEndTimestamp();
             setStep(BLOCK_STEPS.Rate);
           }
           else {

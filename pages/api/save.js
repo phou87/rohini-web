@@ -19,6 +19,12 @@ export default async (req, res) => {
       BlockOrder: data.blockOrder.toString(),
       Ratings: data.ratings.toString(),
       BlockOrderRatings: data.blockOrderRatings.toString(),
+      BlockBeginTimestamps: data.blockBeginTimestamps.join(', '),
+      BlockEndTimestamps: data.blockEndTimestamps.join(', '),
+      PictureBeginTimestamps: data.pictureBeginTimestamps.join(', '),
+      PictureEndTimestamps: data.pictureEndTimestamps.join(', '),
+      TaskBeginTimestamp: data.taskBeginTimestamp,
+      TaskEndTimestamp: data.taskEndTimestamp,
     });
 
     res.statusCode = 200;

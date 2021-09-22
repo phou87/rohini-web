@@ -3,6 +3,7 @@ import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import {AGE_GROUPS} from '../shared/constants';
 import { Button } from "baseui/button";
+import { H1 } from "baseui/typography";
 
 const OPTIONS = [
   {
@@ -22,6 +23,7 @@ const OPTIONS = [
 export function Intro(props) {
   return (
     <>
+      <H1>FamFlex Expressive Flexibility Task</H1>
       <FormControl label="Username">
         <Input
           value={props.username}
