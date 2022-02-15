@@ -25,6 +25,7 @@ export default async (req, res) => {
       PictureEndTimestamps: data.pictureEndTimestamps.join(', '),
       TaskBeginTimestamp: data.taskBeginTimestamp,
       TaskEndTimestamp: data.taskEndTimestamp,
+      ServerTaskEndTimestamp: Date.now(),
     });
 
     res.statusCode = 200;
