@@ -5,6 +5,8 @@ import {AGE_GROUPS} from '../shared/constants';
 import { Button } from "baseui/button";
 import { H1 } from "baseui/typography";
 
+import {useVersion} from '../util/use-version';
+
 const OPTIONS = [
   {
     id: AGE_GROUPS.Adult,
@@ -21,9 +23,11 @@ const OPTIONS = [
 ];
 
 export function Intro(props) {
+  const version = useVersion()
+
   return (
     <>
-      <H1>FamFlex Expressive Flexibility Task</H1>
+      <H1>Emotion Communication Task Visit {version}</H1>
       <FormControl label="Username">
         <Input
           value={props.username}
