@@ -1,15 +1,17 @@
 import {useEffect, useState} from 'react';
 import { RadioGroup, Radio, ALIGN } from 'baseui/radio';
 import { Button } from "baseui/button";
-import {BLOCKS, BLOCK_STEPS} from '../shared/constants';
+import {BLOCKS_BY_VERSION, BLOCK_STEPS} from '../shared/constants';
 import styles from '../styles/Experiment.module.css'
 import homeStyles from '../styles/Home.module.css'
 import instructionStyles from '../styles/Instructions.module.css'
+import {useVersion} from '../util/use-version'
 
 export function Block(props) {
   const [currentImage, setCurrentImage] = useState(0);
   const [rating, setRating] = useState(null);
   const [step, setStep] = useState(BLOCK_STEPS.Cross);
+  const version = useVersion();
   const {ageGroup, block, rateBlock, finishBlock, setPictureBeginTimestamp, setPictureEndTimestamp} = props;
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export function Block(props) {
     case BLOCK_STEPS.Cross:
       return <div className={styles.cross}>+</div>;
     case BLOCK_STEPS.Image:
-      return <img className={styles.experimentImg} src={BLOCKS[ageGroup][block][currentImage]} />
+      return <img className={styles.experimentImg} src={BLOCKS_BY_VERSION[version][ageGroup][block][currentImage]} />
     case BLOCK_STEPS.Rate:
       return (
         <div className={homeStyles.paddedContainer}>

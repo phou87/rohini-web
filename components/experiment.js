@@ -6,6 +6,7 @@ import {InstructionsTwo} from './instructions-two';
 import {Countdown} from './countdown';
 import {Block} from './block';
 import {End} from './end';
+import {useVersion} from '../util/use-version'
 import{ init, send } from 'emailjs-com';
 import styles from '../styles/Home.module.css'
 
@@ -37,6 +38,7 @@ export function Experiment() {
   });
 
   const [resultsSent, setResultsSent] = useState(false);
+  const version = useVersion();
 
   useEffect(() => {
     init('user_UnI50fwe7uvL3JuEFBt1Y');
@@ -100,6 +102,7 @@ export function Experiment() {
           pictureEndTimestamps: globalState.pictureEndTimestamps,
           taskBeginTimestamp: globalState.taskBeginTimestamp,
           taskEndTimestamp: Date.now(),
+          version,
         }),
       });
 

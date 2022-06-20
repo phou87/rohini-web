@@ -26,6 +26,7 @@ export default async (req, res) => {
       TaskBeginTimestamp: data.taskBeginTimestamp,
       TaskEndTimestamp: data.taskEndTimestamp,
       ServerTaskEndTimestamp: Date.now(),
+      Version: data.version,
     });
 
     res.statusCode = 200;
