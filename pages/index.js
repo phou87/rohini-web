@@ -22,7 +22,7 @@ export default function Home() {
       }} theme={DarkTheme}>
         <div className={styles.container}>
           <Head>
-            <title>Family Flex EFT</title>
+            <title>Emotion Communication Task</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
