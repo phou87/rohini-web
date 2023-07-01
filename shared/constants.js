@@ -228,7 +228,7 @@ export const BLOCKS_VERSION_2 = {
     1: [
       '/images/9230.bmp',
       '/images/9332.bmp',
-      '/images/111.bmp',
+      '/images/1111.bmp',
       '/images/2703.bmp',
       '/images/9600.bmp',
     ],

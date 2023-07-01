@@ -6,12 +6,14 @@ import styles from '../styles/Experiment.module.css'
 import homeStyles from '../styles/Home.module.css'
 import instructionStyles from '../styles/Instructions.module.css'
 import {useVersion} from '../util/use-version'
+import {useDebugMode} from '../util/use-debug-mode';
 
 export function Block(props) {
   const [currentImage, setCurrentImage] = useState(0);
   const [rating, setRating] = useState(null);
   const [step, setStep] = useState(BLOCK_STEPS.Cross);
   const version = useVersion();
+  const {getWaitTime} = useDebugMode();
   const {ageGroup, block, rateBlock, finishBlock, setPictureBeginTimestamp, setPictureEndTimestamp} = props;
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export function Block(props) {
       case BLOCK_STEPS.Cross:
         setTimeout(() => {
           setStep(BLOCK_STEPS.Image);
-        }, 4000);
+        }, getWaitTime(4000));
         break;
       case BLOCK_STEPS.Image:
         if (currentImage === 0) {
@@ -34,7 +36,7 @@ export function Block(props) {
             setStep(BLOCK_STEPS.Cross);
             setCurrentImage(currentImage + 1);
           }
-        }, 10000);
+        }, getWaitTime(10000));
         break;
     }
   }, [step]);
