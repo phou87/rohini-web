@@ -25,7 +25,7 @@ const OPTIONS = [
 export function Intro(props) {
   const version = useVersion()
 
-  console.log('test log phou')
+  console.log('test logs phou')
 
   return (
     <>
