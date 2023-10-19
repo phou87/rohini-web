@@ -3,7 +3,7 @@ import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import {AGE_GROUPS} from '../shared/constants';
 import { Button } from "baseui/button";
-import { H1 } from "baseui/typography";
+import { DisplayMedium } from "baseui/typography";
 
 import {useVersion} from '../util/use-version';
 
@@ -27,7 +27,7 @@ export function Intro(props) {
 
   return (
     <>
-      <H1>Emotion Communication Task Visit {version}</H1>
+      <DisplayMedium>Emotion Communication Task Visit {version}</DisplayMedium>
       <FormControl label="Username">
         <Input
           value={props.username}

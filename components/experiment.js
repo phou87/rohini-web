@@ -77,37 +77,41 @@ export function Experiment() {
     }
   });
 
-  useEffect(async () => {
-    if (globalState.step === STEPS.InstructionsTwo) {
-      const blockBeginTimestamps = globalState.blockBeginTimestamps.slice();
-      blockBeginTimestamps[globalState.block] = Date.now();
-      setGlobalState(prevState => ({
-        ...prevState,
-        blockBeginTimestamps,
-      }));
+  useEffect(() => {
+    async function run() {
+      if (globalState.step === STEPS.InstructionsTwo) {
+        const blockBeginTimestamps = globalState.blockBeginTimestamps.slice();
+        blockBeginTimestamps[globalState.block] = Date.now();
+        setGlobalState(prevState => ({
+          ...prevState,
+          blockBeginTimestamps,
+        }));
+      }
+  
+      if (globalState.step === STEPS.End) {
+        await fetch('/api/save', {
+          method: 'POST',
+          cache: 'no-cache',
+          body: JSON.stringify({
+            blockOrder: globalState.blockOrder,
+            blockOrderRatings: globalState.blockOrderRatings,
+            ratings: globalState.ratings,
+            username: globalState.username,
+            blockBeginTimestamps: globalState.blockBeginTimestamps,
+            blockEndTimestamps: globalState.blockEndTimestamps,
+            pictureBeginTimestamps: globalState.pictureBeginTimestamps,
+            pictureEndTimestamps: globalState.pictureEndTimestamps,
+            taskBeginTimestamp: globalState.taskBeginTimestamp,
+            taskEndTimestamp: Date.now(),
+            version,
+          }),
+        });
+  
+        setResultsSent(true);
+      }
     }
 
-    if (globalState.step === STEPS.End) {
-      await fetch('/api/save', {
-        method: 'POST',
-        cache: 'no-cache',
-        body: JSON.stringify({
-          blockOrder: globalState.blockOrder,
-          blockOrderRatings: globalState.blockOrderRatings,
-          ratings: globalState.ratings,
-          username: globalState.username,
-          blockBeginTimestamps: globalState.blockBeginTimestamps,
-          blockEndTimestamps: globalState.blockEndTimestamps,
-          pictureBeginTimestamps: globalState.pictureBeginTimestamps,
-          pictureEndTimestamps: globalState.pictureEndTimestamps,
-          taskBeginTimestamp: globalState.taskBeginTimestamp,
-          taskEndTimestamp: Date.now(),
-          version,
-        }),
-      });
-
-      setResultsSent(true);
-    }
+    run();
   }, [globalState.step]);
 
   const block = globalState.blockOrder[globalState.block];
