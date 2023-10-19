@@ -25,6 +25,8 @@ const OPTIONS = [
 export function Intro(props) {
   const version = useVersion()
 
+  console.log('test log phou')
+
   return (
     <>
       <H1>Emotion Communication Task Visit {version}</H1>
